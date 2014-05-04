@@ -1,0 +1,11 @@
+Things to look into: REmove method cnexp in hh_ex.mod and hh_in.mod. What do these do?
+
+Looking cnexp up on Google - seems it is just saying to use the cnexp method of integration.
+
+
+Built-in example codes can be found here /Applications/NEURON-7.3/nrn/share/nrn
+
+Netcon, connect_pre example here: http://www.neuron.yale.edu/hg/neuron/nrn/file/8f1e96e310dd/share/examples/nrniv/netcon/test.hoc
+
+
+Neuron ref here: http://www.neuron.yale.edu/neuron/static/docs/help/quick_reference.html

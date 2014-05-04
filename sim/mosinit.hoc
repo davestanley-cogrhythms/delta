@@ -1,0 +1,102 @@
+load_file("nrngui.hoc")
+
+objref cvode
+
+cvode = new CVode(0)
+
+
+
+// Creates cell templates, populations, and injection currents 
+load_file("LTS_L5pop.hoc")
+load_file("RS_L5pop.hoc")
+
+
+// Not sure what this does
+// LTS_L5cells[1] -> LTS_L5cells[0].soma
+
+
+// Set up synaptic connections
+maxsyn = 10
+objectvar syn[maxsyn]	//GABA synapses from SI interneurons
+
+RS_L5cells[0].soma syn[0] = new ExpSyn(0)
+LTS_L5cells[0].soma RS_L5cells[0].nclist.append(new NetCon(&v(1), syn[0], -20, 1, 0.5))	//source, dest, thresh, delay, weight
+
+for i = 0, 0 {
+	syn[i].e = -80	//From Jung Lee, EQ 21.
+	syn[i].tau = 20	//From Jung Lee, Table 2
+}
+
+
+// Plotting and viewing stuff
+access LTS_L5cells[0].soma
+cvode_active(1) //may need to disable this
+
+xopen("windows.ses")
+
+tstop = 2000
+run()
+
+
+
+
+//////////// CRAP FOR CREATING PP Stim
+//
+//
+//objref PPSt[npp]
+//for i=0, npp-1 {PPSt[i] = new PPstim(i)}
+//	
+//
+//for i = 0, npp-1 {cell_append(PPSt[i])}	// cell 9 PP
+//
+//
+//
+//
+//objref nclist[dentateBins], netcon, cells
+//{  cells = new List()
+//for i = 0, dentateBins - 1 {nclist[i] = new List()}
+//}
+//
+//
+//		
+//func cell_append() {cells.append($o1) 
+//return cells.count -1}
+//
+//
+//
+//
+//
+//
+//
+//	begintemplate PPstim
+//
+//	public pp, connect_pre, is_art, acell
+//	create acell
+//	objref pp
+//
+//	proc init() {
+//		actemp() 		
+//	}
+//		proc actemp() {
+//				acell pp = new NetStim(.5)
+//				pp.interval = 100
+//				pp.number = 1
+//				pp.start = 5
+//				}
+//
+//	func is_art() {return 1}
+//	proc connect_pre() {acell $o2 = new NetCon(pp, $o1)}
+//	//		print "Connecting ", $o2, " to --> ", $o1, "."
+//
+//	endtemplate PPstim
+//	
+//	
+//	proc connect_pre() {  // $o1 target point process, $o2 returned NetCon
+//	soma $o2 = new NetCon (&v(1), $o1)
+//	}
+//	
+//	
+//	
+//for i=0, npp-1 {PPSt[i] = new PPstim(i)}
+//
+//

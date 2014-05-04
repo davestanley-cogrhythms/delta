@@ -1,0 +1,63 @@
+
+// RS_L5 cell. Parameters mostly taken from:
+// Lee, Whittington, Kopell 2013 PLOS - Top-down beta rhythms
+// Pospischil, Destexhe 2008 - Minimal Hodgkin-Huxley type
+
+begintemplate RS_L5cell
+	public soma, nclist
+
+	create soma
+	objectvar nclist
+
+	proc init() {
+
+	    create soma
+
+	    nclist = new List()
+
+	    soma {
+	      nseg = 1
+	      diam = 18.8 //these values shouldn't matter
+	      L = 18.8    //these values shouldn't matter
+	      insert hh_ex
+	      ena = 50					//From Lee 2008
+	      ek = -95					//From Lee 2008
+              gnabar_hh_ex = 0.100   // S/cm2. He lists 100uS/cm2 in the paper.
+	      gkbar_hh_ex = 0.080        // I am assuming this is 100mS/cm2.
+
+	      insert pas
+	      e_pas=-67					//From Lee 2008
+              g_pas = 0.0001		//From Lee 2008
+
+	      insert KM
+			  //gkmbar_KM = 0.0002	// Old value from original alpha simulation. Not sure where it came from.
+              gkmbar_KM = 0.0013	// Use value from Pospischil 2008, since our RS cell is only 1 compartment
+
+	      cm=1.0                 // units uF/cm2
+	    }
+	}
+endtemplate RS_L5cell
+
+
+nRS_L5cells = 1
+
+objectvar RS_L5cells[nRS_L5cells]
+
+for i = 0, nRS_L5cells-1 {
+    RS_L5cells[i] = new RS_L5cell()
+}
+
+objectvar RS_L5stim[nRS_L5cells]
+for i = 0, nRS_L5cells-1 {
+	RS_L5cells[i].soma {
+	    RS_L5stim[i] = new IClamp(0.5)
+	    RS_L5stim[i].del = 0
+	    RS_L5stim[i].dur = 2000
+	    //RS_L5stim[i].amp = -0.002	// Old value from original alpha simulation. Not sure where it came from.
+	    //RS_L5stim[i].amp = 0.001	//From Lee 2008
+	    RS_L5stim[i].amp = 0.003	//For spontaneous firing
+	}
+}
+
+access RS_L5cells[0].soma
+psection()

@@ -1,0 +1,60 @@
+
+
+begintemplate LTS_L5cell
+	public soma, nclist
+
+	create soma
+	objectvar nclist
+
+	proc init() {
+
+	    create soma
+
+	    nclist = new List()
+
+	    soma {
+	      nseg = 1
+	      diam = 18.8 //these values shouldn't matter
+	      L = 18.8    //these values shouldn't matter
+	      insert hh_in
+	      ena = 50					//From Lee 2008
+	      ek = -95					//From Lee 2008
+              gnabar_hh_in = 0.100   // S/cm2. He lists 100uS/cm2 in the paper.
+	      gkbar_hh_in = 0.080        //I am assuming this is 100mS/cm2.
+
+	      insert pas
+	      e_pas=-67					//From Lee 2008
+              g_pas = 0.0001		//From Lee 2008
+
+	      insert KM
+              gkmbar_KM = 0.004
+              
+
+	      cm=1.0                 // units uF/cm2
+	    }
+	}
+endtemplate LTS_L5cell
+
+
+nLTS_L5cells = 1
+
+objectvar LTS_L5cells[nLTS_L5cells]
+
+for i = 0, nLTS_L5cells-1 {
+    LTS_L5cells[i] = new LTS_L5cell()
+}
+
+objectvar LTS_L5stim[nLTS_L5cells]
+for i = 0, nLTS_L5cells-1 {
+	LTS_L5cells[i].soma {
+	    LTS_L5stim[i] = new IClamp(0.5)
+	    LTS_L5stim[i].del = 1000
+	    LTS_L5stim[i].dur = 1000
+	    //LTS_L5stim[i].amp = -0.001	//From Lee 2008
+	    LTS_L5stim[i].amp = 0.003	// Necessary for spontaneous firing.
+	    
+	}
+}
+
+access LTS_L5cells[0].soma
+psection()
