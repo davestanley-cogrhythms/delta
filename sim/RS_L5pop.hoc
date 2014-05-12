@@ -31,7 +31,10 @@ begintemplate RS_L5cell
 
 	      insert KM
 			  //gkmbar_KM = 0.0002	// Old value from original alpha simulation. Not sure where it came from.
-              gkmbar_KM = 0.0013	// Use value from Pospischil 2008, since our RS cell is only 1 compartment
+//              gkmbar_KM = 0.0013	// Seems to be an order of mag off from pospischil, not sure why using this
+//              gkmbar_KM = 0.00013	// Use value from Pospischil 2008, since our RS cell is only 1 compartment
+              gkmbar_KM = 0.004	// Use same value as Jung uses for dendrites
+              gkmbar_KM = 0.002	// Use same value as Jung uses for dendrites
 
 	      cm=1.0                 // units uF/cm2
 	    }
@@ -54,8 +57,8 @@ for i = 0, nRS_L5cells-1 {
 	    RS_L5stim[i].del = 0
 	    RS_L5stim[i].dur = 2000
 	    //RS_L5stim[i].amp = -0.002	// Old value from original alpha simulation. Not sure where it came from.
-	    //RS_L5stim[i].amp = 0.001	//From Lee 2008
-	    RS_L5stim[i].amp = 0.003	//For spontaneous firing
+	    RS_L5stim[i].amp = 0.01	//From Lee 2008
+//	    RS_L5stim[i].amp = 0.000	//For spontaneous firing
 	}
 }
 

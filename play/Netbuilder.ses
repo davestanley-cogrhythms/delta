@@ -1,0 +1,72 @@
+{load_file("nrngui.hoc")}
+objectvar save_window_, rvp_
+objectvar scene_vector_[3]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+{pwman_place(0,0,0)}
+
+//Begin ArtCellGUI[0]
+{
+load_file("netbild.hoc")
+}
+ocbox_ = new ArtCellGUI(1)
+{object_push(ocbox_)}
+{
+tobj = new MechanismStandard("NetStim")
+tobj.set("interval", 10, 0)
+tobj.set("number", 10, 0)
+tobj.set("start", 50, 0)
+tobj.set("noise", 0, 0)
+}
+{append(tobj, "S")}
+{
+tobj = new MechanismStandard("IntFire1")
+tobj.set("tau", 10, 0)
+tobj.set("refrac", 5, 0)
+}
+{append(tobj, "C")}
+{object_pop()}
+{
+ocbox_.map("ArtCellGUI[0]", 0, 0, 449.28, 291.84)
+}
+objref ocbox_
+//End ArtCellGUI[0]
+
+
+//Begin ArtCellGUI[1]
+{
+load_file("netbild.hoc")
+}
+ocbox_ = new ArtCellGUI(1)
+{object_push(ocbox_)}
+{object_pop()}
+{
+ocbox_.map("ArtCellGUI[1]", 0, 0, 449.28, 291.84)
+}
+objref ocbox_
+//End ArtCellGUI[1]
+
+
+//Begin NetGUI[0]
+{
+load_file("netbild.hoc")
+}
+{ocbox_ = new NetGUI(1)}
+{object_push(ocbox_)}
+{mapold2new = new Vector()  missing = new List()}
+original_type("S")
+original_type("C")
+newnode(0, -164, -71)
+newnode(1, -109, 9)
+newedge(0, 1, 0, 2, 1)
+{g.size(-166.667,166.667,-120.377,120.377)}
+{set_alias(0)}
+{object_pop()}
+{
+ocbox_.map("NetGUI[0]", 828, 11, 562.56, 328.32)
+}
+objref ocbox_
+//End NetGUI[0]
+
+objectvar scene_vector_[1]
+{doNotify()}

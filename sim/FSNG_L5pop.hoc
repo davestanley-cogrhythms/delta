@@ -1,6 +1,6 @@
 
 
-begintemplate LTS_L5cell
+begintemplate FSNG_L5cell
 	public soma, nclist, ncpp
 
 	create soma
@@ -30,10 +30,6 @@ begintemplate LTS_L5cell
 	      e_pas=-67					//From Lee 2013
               g_pas = 0.0001		//From Lee 2013
 
-	      insert KM
-              gkmbar_KM = 0.004
-              
-
 	      cm=1.0                 // units uF/cm2
 	    }
 //	    
@@ -52,30 +48,30 @@ begintemplate LTS_L5cell
 //		ncpp.delay = 1
 	}
 	
-endtemplate LTS_L5cell
+endtemplate FSNG_L5cell
 
 
-nLTS_L5cells = 1
+nFSNG_L5cells = 1
 
-objectvar LTS_L5cells[nLTS_L5cells]
+objectvar FSNG_L5cells[nFSNG_L5cells]
 
-for i = 0, nLTS_L5cells-1 {
-    LTS_L5cells[i] = new LTS_L5cell()
+for i = 0, nFSNG_L5cells-1 {
+    FSNG_L5cells[i] = new FSNG_L5cell()
 }
 
-objectvar LTS_L5stim[nLTS_L5cells]
-for i = 0, nLTS_L5cells-1 {
-	LTS_L5cells[i].soma {
-	    LTS_L5stim[i] = new IClamp(0.5)
-	    LTS_L5stim[i].del = 1000
-	    LTS_L5stim[i].dur = 1000
-	    //LTS_L5stim[i].amp = -0.001	//From Lee 2013
-	    LTS_L5stim[i].amp = 0.003	// Necessary for spontaneous firing.
+objectvar FSNG_L5stim[nFSNG_L5cells]
+for i = 0, nFSNG_L5cells-1 {
+	FSNG_L5cells[i].soma {
+	    FSNG_L5stim[i] = new IClamp(0.5)
+	    FSNG_L5stim[i].del = 0000
+	    FSNG_L5stim[i].dur = 2000
+	    //FSNG_L5stim[i].amp = -0.001	//From Lee 2013
+	    FSNG_L5stim[i].amp = -0.009 // Necessary for spontaneous firing.
 	    
 	}
 }
 
-access LTS_L5cells[0].soma
+access FSNG_L5cells[0].soma
 psection()
 
 

@@ -1,6 +1,6 @@
 
 
-begintemplate LTS_L5cell
+begintemplate IB_L5cell
 	public soma, nclist, ncpp
 
 	create soma
@@ -20,19 +20,25 @@ begintemplate LTS_L5cell
 	      nseg = 1
 	      diam = 18.8 //these values shouldn't matter
 	      L = 18.8    //these values shouldn't matter
-	      insert hh_in
+	      insert hh_ex
 	      ena = 50					//From Lee 2013
 	      ek = -95					//From Lee 2013
-              gnabar_hh_in = 0.100   // S/cm2. He lists 100uS/cm2 in the paper.
-	      gkbar_hh_in = 0.080        //        I am assuming this is 100mS/cm2.
+              gnabar_hh_ex = 0.100   // S/cm2. He lists 100uS/cm2 in the paper.
+	      gkbar_hh_ex = 0.080        //        I am assuming this is 100mS/cm2.
 
 	      insert pas
 	      e_pas=-67					//From Lee 2013
               g_pas = 0.0001		//From Lee 2013
 
 	      insert KM
-              gkmbar_KM = 0.004
-              
+//              gkmbar_KM = 0.004	// Use roughly same order as Jung RS uses for IB dendrites
+              gkmbar_KM = 0.001
+
+	      insert CaH
+//              gbar_CaH = 0.004	// Use roughly same order as Jung uses for IB dendrites
+//              gbar_CaH = 0.0015
+              gbar_CaH = 0.002
+   	      	  eca = 125					//From Lee 2013              
 
 	      cm=1.0                 // units uF/cm2
 	    }
@@ -52,30 +58,33 @@ begintemplate LTS_L5cell
 //		ncpp.delay = 1
 	}
 	
-endtemplate LTS_L5cell
+endtemplate IB_L5cell
 
 
-nLTS_L5cells = 1
+nIB_L5cells = 2
 
-objectvar LTS_L5cells[nLTS_L5cells]
+objectvar IB_L5cells[nIB_L5cells]
 
-for i = 0, nLTS_L5cells-1 {
-    LTS_L5cells[i] = new LTS_L5cell()
+for i = 0, nIB_L5cells-1 {
+    IB_L5cells[i] = new IB_L5cell()
 }
 
-objectvar LTS_L5stim[nLTS_L5cells]
-for i = 0, nLTS_L5cells-1 {
-	LTS_L5cells[i].soma {
-	    LTS_L5stim[i] = new IClamp(0.5)
-	    LTS_L5stim[i].del = 1000
-	    LTS_L5stim[i].dur = 1000
-	    //LTS_L5stim[i].amp = -0.001	//From Lee 2013
-	    LTS_L5stim[i].amp = 0.003	// Necessary for spontaneous firing.
+objectvar IB_L5stim[nIB_L5cells]
+for i = 0, nIB_L5cells-1 {
+	IB_L5cells[i].soma {
+	    IB_L5stim[i] = new IClamp(0.5)
+	    IB_L5stim[i].del = 0000
+	    IB_L5stim[i].dur = 2000
+	    //IB_L5stim[i].amp = -0.001	//From Lee 2013
+	    IB_L5stim[i].amp = 0.001	// Necessary for spontaneous firing.
 	    
 	}
 }
 
-access LTS_L5cells[0].soma
+
+IB_L5cells[nIB_L5cells-1].soma.e_pas = -66.9
+
+access IB_L5cells[0].soma
 psection()
 
 

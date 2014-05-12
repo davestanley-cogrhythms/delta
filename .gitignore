@@ -1,0 +1,25 @@
+# globals
+*~
+#*#
+
+# octave files
+octave-core
+
+# these files got dumped for some reason
+core.*
+
+# large mat files which should probably move to crc-nak.
+*.mat
+*.fig
+
+# Mac files
+*.DS_Store
+*.png
+*.html
+*.pdf
+.DS_Store
+
+# Neuron nrnivmodl files
+*/x86_64/*
+
+

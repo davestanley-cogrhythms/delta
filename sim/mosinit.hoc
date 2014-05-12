@@ -7,8 +7,10 @@ cvode = new CVode(0)
 
 
 // Creates cell templates, populations, and injection currents 
-load_file("LTS_L5pop.hoc")
-load_file("RS_L5pop.hoc")
+//load_file("LTS_L5pop.hoc")
+//load_file("RS_L5pop.hoc")
+load_file("IB_L5pop.hoc")
+load_file("FSNG_L5pop.hoc")
 
 
 // Not sure what this does
@@ -16,23 +18,71 @@ load_file("RS_L5pop.hoc")
 
 
 // Set up synaptic connections
-maxsyn = 10
+maxsyn = 20
+
 objectvar syn[maxsyn]	//GABA synapses from SI interneurons
 
-RS_L5cells[0].soma syn[0] = new ExpSyn(0)
-LTS_L5cells[0].soma RS_L5cells[0].nclist.append(new NetCon(&v(1), syn[0], -20, 1, 0.5))	//source, dest, thresh, delay, weight
+// LTS -> RS
+//currsyn = 0
+//RS_L5cells[0].soma syn[currsyn] = new ExpSyn(0)
+//LTS_L5cells[0].soma RS_L5cells[0].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 1, 0.5))	//source, dest, thresh, delay, weight
+//syn[currsyn].e = -80	//From Jung Lee, EQ 21.
+//syn[currsyn].tau = 20	//From Jung Lee, Table 2
 
-for i = 0, 0 {
-	syn[i].e = -80	//From Jung Lee, EQ 21.
-	syn[i].tau = 20	//From Jung Lee, Table 2
-}
 
+// IB -> FSNG
+//currsyn = currsyn+1
+//FSNG_L5cells[0].soma syn[currsyn] = new Exp2Syn(0)
+//IB_L5cells[0].soma FSNG_L5cells[0].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 1, 0.0000005))	//source, dest, thresh, delay, weight
+//syn[currsyn].e = 0	//From Jung Lee, EQ 21.
+//syn[currsyn].tau1 = 5	//From Jung Lee, Table 2
+//syn[currsyn].tau2 = 100	//From Jung Lee, Table 2
+//
+//currsyn = currsyn+1
+//FSNG_L5cells[0].soma syn[currsyn] = new Exp2Syn(0)
+//IB_L5cells[1].soma FSNG_L5cells[0].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 1, 0.0000005))	//source, dest, thresh, delay, weight
+//syn[currsyn].e = 0	//From Jung Lee, EQ 21.
+//syn[currsyn].tau1 = 5	//From Jung Lee, Table 2
+//syn[currsyn].tau2 = 100	//From Jung Lee, Table 2
+////
+////
+////// FSNG -> IB
+//currsyn = currsyn+1
+//IB_L5cells[0].soma syn[currsyn] = new Exp2Syn(0)
+//FSNG_L5cells[0].soma IB_L5cells[0].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 10, 0.00005))	//source, dest, thresh, delay, weight
+//syn[currsyn].e = -80	//From Jung Lee, EQ 21.
+//syn[currsyn].tau1 = 38	//From Jung Lee, Table 2
+//syn[currsyn].tau2 = 150	//From Jung Lee, Table 2
+//
+//currsyn = currsyn+1
+//IB_L5cells[1].soma syn[currsyn] = new Exp2Syn(0)
+//FSNG_L5cells[0].soma IB_L5cells[1].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 10, 0.00005))	//source, dest, thresh, delay, weight
+//syn[currsyn].e = -80	//From Jung Lee, EQ 21.
+//syn[currsyn].tau1 = 38	//From Jung Lee, Table 2
+//syn[currsyn].tau2 = 150	//From Jung Lee, Table 2
+////
+////
+//// IB1 -> IB0
+//currsyn = currsyn+1
+//IB_L5cells[0].soma syn[currsyn] = new Exp2Syn(0)
+//IB_L5cells[1].soma IB_L5cells[0].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 1, 0.000005))	//source, dest, thresh, delay, weight
+//syn[currsyn].e = 0	//From Jung Lee, EQ 21.
+//syn[currsyn].tau1 = 5	//From Jung Lee, Table 2
+//syn[currsyn].tau2 = 100	//From Jung Lee, Table 2
+//
+//// IB0 -> IB1
+//currsyn = currsyn+1
+//IB_L5cells[1].soma syn[currsyn] = new Exp2Syn(0)
+//IB_L5cells[0].soma IB_L5cells[1].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 1, 0.000005))	//source, dest, thresh, delay, weight
+//syn[currsyn].e = 0	//From Jung Lee, EQ 21.
+//syn[currsyn].tau1 = 5	//From Jung Lee, Table 2
+//syn[currsyn].tau2 = 100	//From Jung Lee, Table 2
 
 // Plotting and viewing stuff
-access LTS_L5cells[0].soma
+//access LTS_L5cells[0].soma
 cvode_active(1) //may need to disable this
 
-xopen("windows.ses")
+xopen("windws_IB2FSNG.ses")
 
 tstop = 2000
 run()
@@ -99,4 +149,4 @@ run()
 //	
 //for i=0, npp-1 {PPSt[i] = new PPstim(i)}
 //
-//
+
