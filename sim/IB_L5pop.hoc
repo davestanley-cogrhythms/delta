@@ -76,7 +76,7 @@ for i = 0, nIB_L5cells-1 {
 	    IB_L5stim[i].del = 0000
 	    IB_L5stim[i].dur = 2000
 	    //IB_L5stim[i].amp = -0.001	//From Lee 2013
-	    IB_L5stim[i].amp = 0.001	// Necessary for spontaneous firing.
+	    IB_L5stim[i].amp = 0.01	// Necessary for spontaneous firing.
 	    
 	}
 }

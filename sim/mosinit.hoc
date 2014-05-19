@@ -31,52 +31,52 @@ objectvar syn[maxsyn]	//GABA synapses from SI interneurons
 
 
 // IB -> FSNG
-//currsyn = currsyn+1
-//FSNG_L5cells[0].soma syn[currsyn] = new Exp2Syn(0)
-//IB_L5cells[0].soma FSNG_L5cells[0].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 1, 0.0000005))	//source, dest, thresh, delay, weight
-//syn[currsyn].e = 0	//From Jung Lee, EQ 21.
-//syn[currsyn].tau1 = 5	//From Jung Lee, Table 2
-//syn[currsyn].tau2 = 100	//From Jung Lee, Table 2
+currsyn = currsyn+1
+FSNG_L5cells[0].soma syn[currsyn] = new Exp2Syn(0)
+IB_L5cells[0].soma FSNG_L5cells[0].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 1, 0.0000005))	//source, dest, thresh, delay, weight
+syn[currsyn].e = 0	//From Jung Lee, EQ 21.
+syn[currsyn].tau1 = 5	//From Jung Lee, Table 2
+syn[currsyn].tau2 = 100	//From Jung Lee, Table 2
+
+currsyn = currsyn+1
+FSNG_L5cells[0].soma syn[currsyn] = new Exp2Syn(0)
+IB_L5cells[1].soma FSNG_L5cells[0].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 1, 0.0000005))	//source, dest, thresh, delay, weight
+syn[currsyn].e = 0	//From Jung Lee, EQ 21.
+syn[currsyn].tau1 = 5	//From Jung Lee, Table 2
+syn[currsyn].tau2 = 100	//From Jung Lee, Table 2
 //
-//currsyn = currsyn+1
-//FSNG_L5cells[0].soma syn[currsyn] = new Exp2Syn(0)
-//IB_L5cells[1].soma FSNG_L5cells[0].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 1, 0.0000005))	//source, dest, thresh, delay, weight
-//syn[currsyn].e = 0	//From Jung Lee, EQ 21.
-//syn[currsyn].tau1 = 5	//From Jung Lee, Table 2
-//syn[currsyn].tau2 = 100	//From Jung Lee, Table 2
-////
-////
-////// FSNG -> IB
-//currsyn = currsyn+1
-//IB_L5cells[0].soma syn[currsyn] = new Exp2Syn(0)
-//FSNG_L5cells[0].soma IB_L5cells[0].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 10, 0.00005))	//source, dest, thresh, delay, weight
-//syn[currsyn].e = -80	//From Jung Lee, EQ 21.
-//syn[currsyn].tau1 = 38	//From Jung Lee, Table 2
-//syn[currsyn].tau2 = 150	//From Jung Lee, Table 2
 //
-//currsyn = currsyn+1
-//IB_L5cells[1].soma syn[currsyn] = new Exp2Syn(0)
-//FSNG_L5cells[0].soma IB_L5cells[1].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 10, 0.00005))	//source, dest, thresh, delay, weight
-//syn[currsyn].e = -80	//From Jung Lee, EQ 21.
-//syn[currsyn].tau1 = 38	//From Jung Lee, Table 2
-//syn[currsyn].tau2 = 150	//From Jung Lee, Table 2
-////
-////
-//// IB1 -> IB0
-//currsyn = currsyn+1
-//IB_L5cells[0].soma syn[currsyn] = new Exp2Syn(0)
-//IB_L5cells[1].soma IB_L5cells[0].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 1, 0.000005))	//source, dest, thresh, delay, weight
-//syn[currsyn].e = 0	//From Jung Lee, EQ 21.
-//syn[currsyn].tau1 = 5	//From Jung Lee, Table 2
-//syn[currsyn].tau2 = 100	//From Jung Lee, Table 2
+//// FSNG -> IB
+currsyn = currsyn+1
+IB_L5cells[0].soma syn[currsyn] = new Exp2Syn(0)
+FSNG_L5cells[0].soma IB_L5cells[0].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 10, 0.00005))	//source, dest, thresh, delay, weight
+syn[currsyn].e = -80	//From Jung Lee, EQ 21.
+syn[currsyn].tau1 = 38	//From Jung Lee, Table 2
+syn[currsyn].tau2 = 150	//From Jung Lee, Table 2
+
+currsyn = currsyn+1
+IB_L5cells[1].soma syn[currsyn] = new Exp2Syn(0)
+FSNG_L5cells[0].soma IB_L5cells[1].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 10, 0.00005))	//source, dest, thresh, delay, weight
+syn[currsyn].e = -80	//From Jung Lee, EQ 21.
+syn[currsyn].tau1 = 38	//From Jung Lee, Table 2
+syn[currsyn].tau2 = 150	//From Jung Lee, Table 2
 //
-//// IB0 -> IB1
-//currsyn = currsyn+1
-//IB_L5cells[1].soma syn[currsyn] = new Exp2Syn(0)
-//IB_L5cells[0].soma IB_L5cells[1].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 1, 0.000005))	//source, dest, thresh, delay, weight
-//syn[currsyn].e = 0	//From Jung Lee, EQ 21.
-//syn[currsyn].tau1 = 5	//From Jung Lee, Table 2
-//syn[currsyn].tau2 = 100	//From Jung Lee, Table 2
+//
+// IB1 -> IB0
+currsyn = currsyn+1
+IB_L5cells[0].soma syn[currsyn] = new Exp2Syn(0)
+IB_L5cells[1].soma IB_L5cells[0].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 1, 0.000005))	//source, dest, thresh, delay, weight
+syn[currsyn].e = 0	//From Jung Lee, EQ 21.
+syn[currsyn].tau1 = 5	//From Jung Lee, Table 2
+syn[currsyn].tau2 = 100	//From Jung Lee, Table 2
+
+// IB0 -> IB1
+currsyn = currsyn+1
+IB_L5cells[1].soma syn[currsyn] = new Exp2Syn(0)
+IB_L5cells[0].soma IB_L5cells[1].nclist.append(new NetCon(&v(1), syn[currsyn], -20, 1, 0.000005))	//source, dest, thresh, delay, weight
+syn[currsyn].e = 0	//From Jung Lee, EQ 21.
+syn[currsyn].tau1 = 5	//From Jung Lee, Table 2
+syn[currsyn].tau2 = 100	//From Jung Lee, Table 2
 
 // Plotting and viewing stuff
 //access LTS_L5cells[0].soma
