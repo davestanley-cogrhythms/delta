@@ -25,7 +25,7 @@ steps_per_ms = 40
 xvalue("Points plotted/ms","steps_per_ms", 1,"setdt()", 0, 1 )
 screen_update_invl = 3
 xvalue("Scrn update invl","screen_update_invl", 1,"", 0, 1 )
-realtime = 0.34
+realtime = 2.28
 xvalue("Real Time","realtime", 0,"", 0, 1 )
 xpanel(71,121)
 }
@@ -48,6 +48,7 @@ scene_vector_[3] = save_window_
 graphList[2].append(save_window_)
 save_window_.save_name("graphList[2].")
 save_window_.addvar("IB_L5cells[0].soma.m_CaH( 0.5 )", 1, 1, 0.584906, 0.917493, 2)
+save_window_.addexpr("IB_L5cells[0].soma.m_KM( 0.5 )", 2, 1, 0.8, 0.9, 2)
 }
 {
 save_window_ = new Graph(0)
